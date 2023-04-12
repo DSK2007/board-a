@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @Autowired
     MemoService memoService;  // MemoService 인터페이스의 구현체를 필드 주입
+    // Hello
 
     @GetMapping("/")
     public String goHome() {
