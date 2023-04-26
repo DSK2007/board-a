@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member read(Member m) {
-        MemberEntity e = memberRepository.getById(m.getSeq()); // JpaRepository 구현체의 메소드
+        MemberEntity e = memberRepository.getById(m.getSeq());
         Member result = new Member(); // DTO (Data Transfer Object) : Controller - Service or Controller - View
         result.setSeq(e.getSeq());
         result.setEmail(e.getEmail());
@@ -53,5 +53,18 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public int delete(Member m) {
         return 0;
+    }
+
+    @Override
+    public Member login(Member m) {
+        MemberEntity e = memberRepository.getByEmailPw(m.getEmail(), m.getPw());
+        Member result = null; // DTO (Data Transfer Object) : Controller - Service or Controller - View
+        if (e != null) {
+            result = new Member();
+            result.setSeq(e.getSeq());
+            result.setEmail(e.getEmail());
+            result.setName(e.getName());
+        }
+        return result;
     }
 }

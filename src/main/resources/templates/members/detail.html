@@ -31,10 +31,10 @@
                             </div>
                             <form class="user" th:action="@{'/members/register'}" th:object="${member}" th:method="post">
                                 <div class="form-group">
-                                    <input type="text" name="name" th:field="*{name}" class="form-control form-control-user" maxlength="30" id="exampleFirstName" placeholder="Name"
+                                    <input type="text" name="name" th:value="${member.name}" th:field="*{name}" class="form-control form-control-user" maxlength="30" id="exampleFirstName" placeholder="Name"
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" th:field="*{email}" class="form-control form-control-user" maxlength="20" id="exampleInputEmail"
+                                    <input type="email" name="email" th:value="${member.email}" th:field="*{email}" class="form-control form-control-user" maxlength="20" id="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
                                 <div class="form-group">

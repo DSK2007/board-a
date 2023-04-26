@@ -2,6 +2,8 @@ package idusw.springboot3.boardthymeleaf.controller;
 
 import idusw.springboot3.boardthymeleaf.domain.Member;
 import idusw.springboot3.boardthymeleaf.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +13,35 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     // Constructor DI(Dependency Injection)
     MemberService memberService;
+    HttpSession session = null;
     public MemberController(MemberService memberService) { // Spring Framework이 주입(하도록 요청함)
         this.memberService = memberService;
     }
 
+
     @GetMapping("/login")
-    public String getLoginform() { // 로그인 처리 : service + repository 활용
-        return "/members/login";
+    public String getLoginform(Model model) { // 로그인 처리 : service + repository 활용
+        model.addAttribute("member", Member.builder().build()); // email / pw 전달을 위한 객체
+        return "/members/login"; // view : template engine - thymeleaf .html
     }
 
     @PostMapping("/login")
-    public String loginMember() { // 로그인 처리 -> service - > repository -> service -> controller
-        return "redirect:/";
+    public String loginMember(@ModelAttribute("member") Member member, HttpServletRequest request) { // 로그인 처리 -> service - > repository -> service -> controller
+        Member result = null;
+        if ((result = memberService.login(member)) != null) { // 정상적으로 레코드의 변화가 발생하는 경우 영향받는 레코드 수를 반환
+            session = request.getSession();
+            session.setAttribute("mb", result);
+            return "redirect:/";
+        }
+        else
+            return "/main/error";
     }
 
+    @GetMapping("/logout")
+    public String logoutMember() {
+        session.invalidate();
+        return "redirect:/";
+    }
     @GetMapping("/register")
     public String getRegisterform(Model model) { // form 요청 -> view (template engine)
         model.addAttribute("member", Member.builder().build());
@@ -46,7 +63,7 @@ public class MemberController {
         result = memberService.read(m);
         // MemberService가 MemberRepository에게 전달
         // MemberRepository가 JpaRepository 인터페이스의 구현체를 활용할 수 있음
-        model.addAttribute("attr", result);
+        model.addAttribute("member", result);
         return "/members/detail";
     }
 
