@@ -31,21 +31,15 @@
                             </div>
                             <form class="user" th:action="@{'/members/register'}" th:object="${member}" th:method="post">
                                 <div class="form-group">
-                                    <input type="text" name="name" th:field="*{name}" class="form-control form-control-user" id="exampleFirstName"
+                                    <input type="text" name="name" th:field="*{name}" class="form-control form-control-user" maxlength="30" id="exampleFirstName" placeholder="Name"
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" th:field="*{email}" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="email" name="email" th:field="*{email}" class="form-control form-control-user" maxlength="20" id="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" name="pw" th:field="*{pw}" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
-                                    </div>
+                                <div class="form-group">
+                                    <input type="password" name="pw" th:field="*{pw}" class="form-control form-control-user"
+                                           maxlength="20" id="exampleInputPassword" placeholder="Password">
                                 </div>
                                 <input type="submit" value="Register Account" class="btn btn-primary btn-user btn-block">
                                 <hr>

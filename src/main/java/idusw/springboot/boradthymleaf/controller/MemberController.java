@@ -32,8 +32,6 @@ public class MemberController {
     }
     @PostMapping("/register")
     public String createMember(@ModelAttribute("member") Member member, Model model) { // 등록 처리 -> service - > repository -> service -> controller
-        System.out.println(member);
-        member.setSeq(1L);
         if (memberService.create(member) > 0 ) // 정상적으로 레코드의 변화가 발생하는 경우 영향받는 레코드 수를 반환
             return "redirect:/";
         else
