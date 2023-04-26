@@ -1,7 +1,7 @@
-package idusw.springboot.boradthymleaf.controller;
+package idusw.springboot3.boardthymeleaf.controller;
 
-import idusw.springboot.boradthymleaf.domain.Memo;
-import idusw.springboot.boradthymleaf.service.MemoService;
+import idusw.springboot3.boardthymeleaf.domain.Memo;
+import idusw.springboot3.boardthymeleaf.service.MemoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

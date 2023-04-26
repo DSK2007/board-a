@@ -1,4 +1,4 @@
-package idusw.springboot.boradthymleaf.domain;
+package idusw.springboot3.boardthymeleaf.domain;
 
 import lombok.*;
 

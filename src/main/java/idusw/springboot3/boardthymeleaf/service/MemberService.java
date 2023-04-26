@@ -1,6 +1,6 @@
-package idusw.springboot.boradthymleaf.service;
+package idusw.springboot3.boardthymeleaf.service;
 
-import idusw.springboot.boradthymleaf.domain.Member;
+import idusw.springboot3.boardthymeleaf.domain.Member;
 
 import java.util.List;
 

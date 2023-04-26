@@ -1,8 +1,10 @@
-package idusw.springboot.boradthymleaf.service;
+package idusw.springboot3.boardthymeleaf.service;
 
-import idusw.springboot.boradthymleaf.domain.Member;
-import idusw.springboot.boradthymleaf.entity.MemberEntity;
-import idusw.springboot.boradthymleaf.repository.MemberRepository;
+import idusw.springboot3.boardthymeleaf.domain.Member;
+import idusw.springboot3.boardthymeleaf.domain.Memo;
+import idusw.springboot3.boardthymeleaf.entity.MemberEntity;
+import idusw.springboot3.boardthymeleaf.entity.MemoEntity;
+import idusw.springboot3.boardthymeleaf.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +32,12 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member read(Member m) {
-        return null;
+        MemberEntity e = memberRepository.getById(m.getSeq()); // JpaRepository 구현체의 메소드
+        Member result = new Member(); // DTO (Data Transfer Object) : Controller - Service or Controller - View
+        result.setSeq(e.getSeq());
+        result.setEmail(e.getEmail());
+        result.setName(e.getName());
+        return result;
     }
 
     @Override

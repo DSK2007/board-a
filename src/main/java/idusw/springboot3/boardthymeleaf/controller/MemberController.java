@@ -1,7 +1,7 @@
-package idusw.springboot.boradthymleaf.controller;
+package idusw.springboot3.boardthymeleaf.controller;
 
-import idusw.springboot.boradthymleaf.domain.Member;
-import idusw.springboot.boradthymleaf.service.MemberService;
+import idusw.springboot3.boardthymeleaf.domain.Member;
+import idusw.springboot3.boardthymeleaf.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +38,18 @@ public class MemberController {
             return "/main/error";
     }
 
+    @GetMapping("/{seq}")
+    public String getMember(@PathVariable("seq") Long seq, Model model) {
+        Member result = new Member(); // 반환
+        Member m = new Member(); // 매개 변수로 전달
+        m.setSeq(seq);
+        result = memberService.read(m);
+        // MemberService가 MemberRepository에게 전달
+        // MemberRepository가 JpaRepository 인터페이스의 구현체를 활용할 수 있음
+        model.addAttribute("attr", result);
+        return "/members/detail";
+    }
+
     @GetMapping("/update")
     public String getUpdateform() { // form 요청 -> view (template engine)
         return "/members/update";
@@ -57,7 +69,7 @@ public class MemberController {
         return "/members/forgot-password";
     }
     @PostMapping("/forgot")
-    public String postForgotPassword() { // 비밀번호 갱신 -> service - > repository -> service -> controller
+    public String forgotMemberPassword() { // 비밀번호 갱신 -> service - > repository -> service -> controller
         return "redirect:/"; // 루트로 이동
     }
 }
